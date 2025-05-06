@@ -1,0 +1,247 @@
+body {
+    background-color: #001F3F;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+    margin: 20px auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 10px 0 30px 0;
+    color: #FFD700;
+}
+
+#store-buttons {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+a {
+    width: 100%;
+    text-decoration: none;
+}
+
+button {
+    width: 100%;
+    background-color: #FFD700;
+    color: #001F3F;
+    border: none;
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.nearby-store {
+    background-color: #00BFFF; /* Light blue for nearby stores */
+    color: white;
+}
+
+.nearest-store {
+    background-color: #00FF7F; /* Spring green for nearest store */
+    color: #001F3F;
+    animation: pulse-highlight 2s infinite;
+    font-weight: bolder;
+    border: 3px solid white;
+    position: relative;
+    z-index: 2;
+    transform: scale(1.05);
+}
+
+/* Add "Nearest" label to the nearest store button */
+.nearest-store::after {
+    content: "NEAREST";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #FF4500;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    z-index: 3;
+}
+
+#loader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    font-size: 24px;
+}
+
+.loader-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    animation: pulse 1.2s infinite ease-in-out;
+}
+
+#nearby-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #001F3F;
+    border: 2px solid #00BFFF;
+    border-radius: 16px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 10000;
+    box-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
+}
+
+#nearby-popup h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #FFD700;
+}
+
+#nearby-popup ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+#nearby-popup li {
+    padding: 15px;
+    margin-bottom: 12px;
+    background-color: #003366;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+#nearby-popup li:hover {
+    transform: scale(1.02);
+    background-color: #004488;
+}
+
+#nearby-popup li.nearest {
+    background-color: #004d00;
+    border: 2px solid #00FF7F;
+}
+
+#nearby-popup button {
+    margin-top: 15px;
+    background-color: #00BFFF;
+    color: white;
+}
+
+.popup-distance {
+    font-size: 14px;
+    color: #FFD700;
+    margin-top: 5px;
+}
+
+#nearby-stores-count {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #00BFFF;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    display: none;
+    font-size: 18px;
+    transition: transform 0.2s;
+}
+
+#nearby-stores-count:hover {
+    transform: scale(1.1);
+}
+
+.location-message {
+    background-color: rgba(0, 191, 255, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 25px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    font-size: 15px;
+    display: none;
+}
+
+.highlight-text {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.6; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse-highlight {
+    0% { box-shadow: 0 0 0 0 rgba(0, 255, 127, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 255, 127, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 255, 127, 0); }
+}
+
+@media (min-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+    button {
+        font-size: 18px;
+    }
+    .logo {
+        max-width: 240px;
+    }
+}
